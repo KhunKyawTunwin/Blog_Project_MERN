@@ -15,6 +15,7 @@ mongoose
 
 // Route and Middle
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 
 app.listen(
   process.env.PORT,

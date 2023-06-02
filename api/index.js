@@ -44,5 +44,6 @@ app.use("/api/categories", categoryRoute);
 
 app.listen(
   process.env.PORT,
+  connectDb(process.env.MONGO_URL),
   console.log(`Server running at PORT:http://localhost:${process.env.PORT}`)
 );

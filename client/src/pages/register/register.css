@@ -1,4 +1,4 @@
-.login {
+.register {
   height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
@@ -12,44 +12,44 @@
   background-size: cover;
 }
 
-.loginTitle {
+.registerTitle {
   font-size: 50px;
 }
 
-.loginForm {
+.registerForm {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.loginForm > label {
+.registerForm > label {
   margin: 10px 0;
 }
 
-.loginInput {
+.registerInput {
   padding: 10px;
   background-color: white;
   border: none;
+  border-radius: 5px;
 }
 
-.loginButton {
+.registerButton {
   margin-top: 20px;
   padding: 10px;
   cursor: pointer;
-  background-color: rgb(240, 98, 73);
-  border: none;
-  color: white;
-  border-radius: 10px;
-}
-
-.loginRegisterButton {
-  position: absolute;
-  top: 60px;
-  padding: 10px;
-  right: 20px;
   background-color: teal;
   border: none;
   color: white;
   border-radius: 10px;
-  cursor: pointer;
+}
+
+.registerLoginButton {
+  position: absolute;
+  top: 60px;
+  padding: 10px;
+  right: 20px;
+  background-color: tomato;
+  border: none;
+  color: white;
+  border-radius: 10px;
 }

@@ -3,6 +3,7 @@ const User = require("../models/User");
 
 exports.userRegister = async (req, res) => {
   const { username, email, password } = req.body;
+
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);

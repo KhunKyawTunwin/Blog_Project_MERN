@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const multer = require("multer");
+const cors = require("cors");
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
@@ -11,6 +12,7 @@ const categoryRoute = require("./routes/categories");
 require("dotenv").config();
 
 // Middle
+app.use(cors());
 app.use(express.json());
 
 mongoose
@@ -44,4 +46,4 @@ app.use("/api/categories", categoryRoute);
 
 let PORT = process.env.PORT || 8080;
 
-app.listen(PORT, console.log(`Rrunning at Port : http://localhost:${PORT}`));
+app.listen(PORT, console.log(`Running at Port : http://localhost:${PORT}`));

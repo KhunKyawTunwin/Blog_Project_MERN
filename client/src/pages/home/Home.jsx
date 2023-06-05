@@ -5,23 +5,28 @@ import Axios from "axios";
 
 import "./home.css";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const { search } = useLocation();
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await Axios.get("http://localhost:5000/api/posts");
-      console.log(res);
+      const respone = await Axios.get(
+        `http://localhost:5000/api/posts/${search}`
+      );
+
+      setPosts(respone.data);
     };
     fetchPost();
-  }, []);
+  }, [search]);
 
   return (
     <div>
       <Header />
       <div className="home">
-        <Posts />
+        <Posts posts={posts} />
         <Sidebar />
       </div>
     </div>

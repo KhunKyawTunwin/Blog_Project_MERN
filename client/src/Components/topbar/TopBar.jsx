@@ -37,10 +37,25 @@ const TopBar = () => {
         </ul>
       </div>
       <div className="topRight">
-        <img
-          className="topImg"
-          src="https://images.unsplash.com/photo-1467307983825-619715426c70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1077&q=80"
-        />
+        {user ? (
+          <img
+            className="topImg"
+            src="https://images.unsplash.com/photo-1467307983825-619715426c70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1077&q=80"
+          />
+        ) : (
+          <ul className="topList">
+            <li className="topListItem">
+              <Link className="link" to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="topListItem">
+              <Link className="link" to="/register">
+                Register
+              </Link>
+            </li>
+          </ul>
+        )}
 
         <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
       </div>

@@ -42,8 +42,6 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/categories", categoryRoute);
 
-app.listen(
-  process.env.PORT,
-  connectDb(process.env.MONGO_URL),
-  console.log(`Server running at PORT:http://localhost:${process.env.PORT}`)
-);
+let PORT = process.env.PORT || 8080;
+
+app.listen(PORT, console.log(`Rrunning at Port : http://localhost:${PORT}`));

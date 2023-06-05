@@ -1,35 +1,10 @@
 const router = require("express").Router();
-const bcrypt = require("bcrypt");
-const registerController = require("../controllers/registerController");
-
-const User = require("../models/User");
+const authController = require("../controllers/authController");
 
 // Register
-router.post("/register", registerController.userRegister);
+router.post("/register", authController.userRegister);
 
 // Login
-router.post("/login", async (req, res) => {
-  const { username } = req.body;
-
-  try {
-    const user = await User.findOne({ username });
-
-    if (!user) {
-      return res.status(400).json(`${username} Wrong credentials!`);
-    }
-
-    const validated = await bcrypt.compare(req.body.password, user.password);
-
-    if (!validated) {
-      return res.status(400).json(`${username} Wrong credentials!`);
-    }
-
-    const { password, ...others } = user._doc;
-
-    res.status(200).json(others);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.post("/login", authController.userLogin);
 
 module.exports = router;

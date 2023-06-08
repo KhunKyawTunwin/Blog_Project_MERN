@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import Axios from "axios";
 import "./register.css";
 import { useState } from "react";
@@ -7,19 +7,24 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await Axios.post(
-      "http://localhost:5000/api/auth/register",
-      {
-        username,
-        email,
-        password,
-      }
-    );
-    console.log(response);
+    setError(false);
+    try {
+      const response = await Axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
+      response.data && window.location.replace("/login");
+    } catch (err) {
+      setError(true);
+    }
   };
 
   return (
@@ -56,6 +61,11 @@ const Register = () => {
           Login
         </Link>
       </button>
+      {error && (
+        <span style={{ color: "tomato", marginTop: "10px" }}>
+          Something went wrong! 😭
+        </span>
+      )}
     </div>
   );
 };

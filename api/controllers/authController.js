@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
+// UserRegister
 exports.userRegister = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -20,21 +21,22 @@ exports.userRegister = async (req, res) => {
   }
 };
 
+// userLogin
 exports.userLogin = () => {
   async (req, res) => {
-    const { username } = req.body;
+    const {} = req.body;
 
     try {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(400).json(`${username} Wrong credentials!`);
+        return res.status(400).json(`${email} Wrong credentials!`);
       }
 
       const validated = await bcrypt.compare(req.body.password, user.password);
 
       if (!validated) {
-        return res.status(400).json(`${username} Wrong credentials!`);
+        return res.status(400).json(`${email} Wrong credentials!`);
       }
 
       const { password, ...others } = user._doc;

@@ -50,6 +50,7 @@
   font-weight: 400;
   cursor: pointer;
 }
+
 .topListItem > :link {
   text-decoration: none;
 }

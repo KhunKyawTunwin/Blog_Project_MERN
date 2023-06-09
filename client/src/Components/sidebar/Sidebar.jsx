@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
+import { BACKEND_URL } from "../../config/index";
 
 const Sidebar = () => {
   const [cats, setCats] = useState([]);
 
   useEffect(() => {
     const getCats = async () => {
-      const response = await Axios.get("http://localhost:5000/api/categories");
+      const response = await Axios.get(`${BACKEND_URL}/categories`);
       setCats(response.data);
     };
     getCats();

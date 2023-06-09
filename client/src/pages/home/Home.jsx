@@ -6,6 +6,7 @@ import Axios from "axios";
 import "./home.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { BACKEND_URL } from "../../config";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -13,9 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const respone = await Axios.get(
-        `http://localhost:5000/api/posts/${search}`
-      );
+      const respone = await Axios.get(`${BACKEND_URL}/posts/${search}`);
 
       setPosts(respone.data);
     };

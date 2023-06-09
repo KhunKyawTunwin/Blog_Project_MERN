@@ -2,6 +2,7 @@ import { Link, redirect } from "react-router-dom";
 import Axios from "axios";
 import "./register.css";
 import { useState } from "react";
+import { BACKEND_URL } from "../../config";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -13,14 +14,11 @@ const Register = () => {
     e.preventDefault();
     setError(false);
     try {
-      const response = await Axios.post(
-        "http://localhost:5000/api/auth/register",
-        {
-          username,
-          email,
-          password,
-        }
-      );
+      const response = await Axios.post(`${BACKEND_URL}/auth/register`, {
+        username,
+        email,
+        password,
+      });
       response.data && window.location.replace("/login");
     } catch (err) {
       setError(true);

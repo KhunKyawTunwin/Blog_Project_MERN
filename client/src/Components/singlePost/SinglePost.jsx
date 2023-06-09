@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./singlePost.css";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import { BACKEND_URL } from "../../config";
 
 const SinglePost = () => {
   const location = useLocation();
@@ -10,19 +11,23 @@ const SinglePost = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const response = await Axios.get(
-        `http://localhost:5000/api/posts/${path}`
-      );
+      const response = await Axios.get(`${BACKEND_URL}/posts/${path}`);
       setPost(response.data);
     };
     getPost();
   }, [path]);
 
+  const proFileImg = "http://localhost:5000/images/";
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img className="singlePostImg" src={post.photo} alt="singlePost" />
+          <img
+            className="singlePostImg"
+            src={proFileImg + post.photo}
+            alt="singlePost"
+          />
         )}
         <h2 className="singlePostTitle">
           {post.title}

@@ -13,6 +13,10 @@
   object-fit: cover;
 }
 
+.link:hover {
+  color: rgb(77, 77, 223);
+}
+
 .singlePostTitle {
   text-align: center;
   margin: 10px;

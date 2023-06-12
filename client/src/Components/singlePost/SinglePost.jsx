@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import { BACKEND_URL } from "../../config";
@@ -11,6 +11,9 @@ const SinglePost = () => {
   const [post, setPost] = useState({});
   const { user } = useContext(Context);
   const proFileImg = "http://localhost:5000/images/";
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [updateMode, setUpdateMode] = useState(false);
 
   useEffect(() => {
     const getPost = async () => {
@@ -24,6 +27,7 @@ const SinglePost = () => {
     await Axios.delete(`${BACKEND_URL}/posts/${post._id}`, {
       data: { username: user.username },
     });
+    window.location.replace(`/`);
   };
 
   return (
@@ -36,16 +40,32 @@ const SinglePost = () => {
             alt="singlePost"
           />
         )}
-        <h2 className="singlePostTitle">{post.title}</h2>
-        {post.username === user?.username && (
-          <div className="singlePostEdit">
-            <i className="singlePostIcon fa-regular fa-pen-to-square" />
-            <i
-              className="singlePostIcon fa-solid fa-trash"
-              onClick={handleDelete}
-            />
-          </div>
+
+        {updateMode ? (
+          <input
+            className="singlePostTitleInput"
+            type="text"
+            value={post.title}
+            id=""
+          />
+        ) : (
+          <h2 className="singlePostTitle">
+            {post.title}
+            {post.username === user?.username && (
+              <div className="singlePostEdit">
+                <i
+                  className="singlePostIcon fa-regular fa-pen-to-square"
+                  onClick={() => setUpdateMode(true)}
+                />
+                <i
+                  className="singlePostIcon fa-solid fa-trash"
+                  onClick={handleDelete}
+                />
+              </div>
+            )}
+          </h2>
         )}
+
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
             Author:
@@ -57,7 +77,11 @@ const SinglePost = () => {
             post.createdAt
           ).toDateString()}`}</span>
         </div>
-        <p className="singlePostDesc">{post.desc}</p>
+        {updateMode ? (
+          <textarea className="singlePostDescInput"></textarea>
+        ) : (
+          <p className="singlePostDesc">{post.desc}</p>
+        )}
       </div>
     </div>
   );

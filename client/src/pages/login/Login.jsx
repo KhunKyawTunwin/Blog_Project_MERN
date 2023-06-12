@@ -25,7 +25,6 @@ const Login = () => {
     }
   };
 
-  console.log(isFetching);
   return (
     <div className="login">
       <span className="loginTitle">Login</span>

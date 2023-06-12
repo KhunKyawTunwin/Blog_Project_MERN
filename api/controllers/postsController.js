@@ -40,12 +40,12 @@ exports.postUpdate = async (req, res) => {
 // DeletePost
 exports.postDelete = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-
+    const postid = req.params.id;
+    const post = await Post.findById(postid);
     if (post.username === req.body.username) {
       try {
-        await post.delete();
-        res.status(200).json("Post have been deleted ...");
+        await Post.findByIdAndDelete(postid);
+        res.status(200).json(postid);
       } catch (err) {
         res.status(500).json(err);
       }

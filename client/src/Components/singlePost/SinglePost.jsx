@@ -19,6 +19,8 @@ const SinglePost = () => {
     const getPost = async () => {
       const response = await Axios.get(`${BACKEND_URL}/posts/${path}`);
       setPost(response.data);
+      setTitle(response.data.title);
+      setDesc(response.data.desc);
     };
     getPost();
   }, [path]);
@@ -28,6 +30,17 @@ const SinglePost = () => {
       data: { username: user.username },
     });
     window.location.replace(`/`);
+  };
+
+  const handleUpdate = async () => {
+    try {
+      await Axios.put(`${BACKEND_URL}/posts/${post._id}`, {
+        username: user.username,
+        title,
+        desc,
+      });
+      setUpdateMode(false);
+    } catch (err) {}
   };
 
   return (
@@ -45,12 +58,13 @@ const SinglePost = () => {
           <input
             className="singlePostTitleInput"
             type="text"
-            value={post.title}
-            id=""
+            value={title}
+            autoFocus
+            onChange={(e) => setTitle(e.target.value)}
           />
         ) : (
           <h2 className="singlePostTitle">
-            {post.title}
+            {title}
             {post.username === user?.username && (
               <div className="singlePostEdit">
                 <i
@@ -78,9 +92,19 @@ const SinglePost = () => {
           ).toDateString()}`}</span>
         </div>
         {updateMode ? (
-          <textarea className="singlePostDescInput"></textarea>
+          <textarea
+            className="singlePostDescInput"
+            value={desc}
+            autoFocus
+            onChange={(e) => setDesc(e.target.value)}
+          />
         ) : (
-          <p className="singlePostDesc">{post.desc}</p>
+          <p className="singlePostDesc">{desc}</p>
+        )}
+        {updateMode && (
+          <button className="singlePostButton" onClick={handleUpdate}>
+            Update
+          </button>
         )}
       </div>
     </div>

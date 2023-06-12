@@ -67,7 +67,7 @@ exports.getPost = async (req, res) => {
   }
 };
 
-// GetPosts
+// GetAllPosts
 exports.getPosts = async (req, res) => {
   const username = req.query.user;
   const catName = req.query.cat;

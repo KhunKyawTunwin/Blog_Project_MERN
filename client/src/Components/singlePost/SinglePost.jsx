@@ -1,13 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
-import "./singlePost.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import { BACKEND_URL } from "../../config";
+import { Context } from "../../content/Content";
+import "./singlePost.css";
 
 const SinglePost = () => {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [post, setPost] = useState({});
+  const { user } = useContext(Context);
+  const proFileImg = "http://localhost:5000/images/";
 
   useEffect(() => {
     const getPost = async () => {
@@ -17,7 +20,11 @@ const SinglePost = () => {
     getPost();
   }, [path]);
 
-  const proFileImg = "http://localhost:5000/images/";
+  const handleDelete = async () => {
+    await Axios.delete(`${BACKEND_URL}/posts/${post._id}`, {
+      data: { username: user.username },
+    });
+  };
 
   return (
     <div className="singlePost">
@@ -29,13 +36,16 @@ const SinglePost = () => {
             alt="singlePost"
           />
         )}
-        <h2 className="singlePostTitle">
-          {post.title}
+        <h2 className="singlePostTitle">{post.title}</h2>
+        {post.username === user?.username && (
           <div className="singlePostEdit">
-            <i className="singlePostIcon fa-regular fa-pen-to-square"></i>
-            <i className="singlePostIcon fa-solid fa-trash"></i>
+            <i className="singlePostIcon fa-regular fa-pen-to-square" />
+            <i
+              className="singlePostIcon fa-solid fa-trash"
+              onClick={handleDelete}
+            />
           </div>
-        </h2>
+        )}
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
             Author:

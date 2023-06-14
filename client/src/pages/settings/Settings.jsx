@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./settings.css";
 import Sidebar from "../../Components/sidebar/Sidebar";
+import { Context } from "../../content/Content";
 
 const Settings = () => {
+  const { user } = useContext(Context);
+
   return (
     <div className="settings">
       <div className="settingsWrapper">
@@ -13,11 +16,7 @@ const Settings = () => {
         <form className="settingsForm">
           <label>Profile Picture</label>
           <div className="settingsProPic">
-            <img
-              className="settingsProPic_img"
-              src="https://images.unsplash.com/photo-1631947430066-48c30d57b943?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=716&q=80"
-              alt=""
-            />
+            <img className="settingsProPic_img" src={user.profilePic} />
             <label htmlFor="fileInput">
               <i className="settingsProPicIcon far fa-user-circle"></i>
             </label>

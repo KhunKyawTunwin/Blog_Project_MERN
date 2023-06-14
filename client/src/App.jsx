@@ -1,6 +1,4 @@
 import { useContext } from "react";
-import Post from "./Components/post/Post";
-import SinglePost from "./Components/singlePost/SinglePost";
 import TopBar from "./Components/topbar/TopBar";
 import Write from "./Components/write/Write";
 import Home from "./pages/home/Home";

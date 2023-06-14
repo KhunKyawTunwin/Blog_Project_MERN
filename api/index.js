@@ -12,11 +12,12 @@ const categoryRoute = require("./routes/categories");
 
 require("dotenv").config();
 
-// Middle
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
+//Data config
 mongoose
   .connect(process.env.MONGO_URL)
   .then(console.log("Connected to MongoDB"))
@@ -46,6 +47,7 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/categories", categoryRoute);
 
+// Server config
 let PORT = process.env.PORT || 8080;
 
 app.listen(PORT, console.log(`Running at Port : http://localhost:${PORT}`));

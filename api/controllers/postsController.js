@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const fileHelp = require("../util/file");
 
 // CreatePost
 exports.createPost = async (req, res) => {

@@ -6,6 +6,16 @@ import { BACKEND_URL } from "../../config/index";
 
 const Sidebar = () => {
   const [cats, setCats] = useState([]);
+  //   const [fixed, setFixed] = useState(false);
+  //
+  //   const setFixedSidebar = () => {
+  //     if (window.scrollY >= 500) {
+  //       setFixed(true);
+  //     } else {
+  //       setFixed(false);
+  //     }
+  //   };
+  //   window.addEventListener("scroll", setFixedSidebar);
 
   useEffect(() => {
     const getCats = async () => {
@@ -16,7 +26,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar`}>
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img

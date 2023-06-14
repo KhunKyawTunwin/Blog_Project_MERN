@@ -9,6 +9,11 @@
   align-items: center;
 }
 
+/* .fixed {
+  position: relative;
+  top: 3%;
+} */
+
 .sidebarItem {
   display: flex;
   flex-direction: column;

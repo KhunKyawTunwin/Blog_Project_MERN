@@ -4,6 +4,12 @@ const bcrypt = require("bcrypt");
 
 // UpdateUser
 exports.updateUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json("Please input");
+  }
+
   if (req.body.userId === req.params.id) {
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);

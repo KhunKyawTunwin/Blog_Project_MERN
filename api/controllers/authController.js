@@ -6,6 +6,31 @@ exports.userRegister = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    if ((!username || !email, !password)) {
+      res.status(400).json({ message: error.message });
+    }
+
+    if (!/^[a-zA-Z ]*$/.test(username)) {
+      res.status(400).json({
+        status: "FAILED",
+        message: "Invalid name entered",
+      });
+    }
+
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      res.status(400).json({
+        status: "FAILED",
+        message: "Invalid email entered",
+      });
+    }
+
+    if (password.length < 8) {
+      res.status(400).json({
+        status: "FAILED",
+        message: "Password is too short!",
+      });
+    }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
     const newUser = new User({

@@ -1,10 +1,8 @@
 const Post = require("../models/Post");
-const fileHelp = require("../util/file");
 
 // CreatePost
 exports.createPost = async (req, res) => {
   const newPost = new Post(req.body);
-
   try {
     const createdPost = await newPost.save();
     res.status(201).json(createdPost);

@@ -1,4 +1,6 @@
 const Post = require("../models/Post");
+const path = require("path");
+const fs = require("fs");
 
 // CreatePost
 exports.createPost = async (req, res) => {
@@ -38,21 +40,31 @@ exports.postUpdate = async (req, res) => {
 
 // DeletePost
 exports.postDelete = async (req, res) => {
+  // console.log(post.photo);
   try {
-    const postid = req.params.id;
-    const post = await Post.findById(postid);
-    if (post.username === req.body.username) {
-      try {
-        await Post.findByIdAndDelete(postid);
-        res.status(200).json(postid);
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    } else {
-      res.status(401).json("You can delete only your post!");
+    const { postId } = req.params;
+    const { username } = req.body;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
     }
+
+    if (post.username !== username) {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    // Delete the associated image file
+    if (post.photo) {
+      const imagePath = path.join(__dirname, "../images", post.photo);
+      fs.unlinkSync(imagePath);
+    }
+
+    await Post.findByIdAndDelete(postId);
+
+    res.json({ message: "Post deleted successfully" });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

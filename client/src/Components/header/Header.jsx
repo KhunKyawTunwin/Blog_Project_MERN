@@ -1,11 +1,11 @@
 import "./header.css";
 
-const Header = () => {
+const Header = ({ title, subTitle }) => {
   return (
     <div className="header">
       <div className="headerTitles">
-        <span className="headerTitleSm">Most Places</span>
-        <span className="headerTitleLg">Best Investment Land In Asia</span>
+        <span className="headerTitleSm">{title}</span>
+        <span className="headerTitleLg">{subTitle}</span>
       </div>
       <img
         className="headerImg"

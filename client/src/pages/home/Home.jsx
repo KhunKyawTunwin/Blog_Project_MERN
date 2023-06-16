@@ -23,7 +23,10 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
+      <Header
+        title="Most places should go to make Investment"
+        subTitle="Best Investment Land In Asia"
+      />
       <div className="home">
         <Posts posts={posts} />
         <Sidebar />

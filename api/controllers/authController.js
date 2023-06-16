@@ -7,25 +7,25 @@ exports.userRegister = async (req, res) => {
 
   try {
     if ((!username || !email, !password)) {
-      res.status(400).json({ message: error.message });
+      return res.status(400).json({ message: error.message });
     }
 
     if (!/^[a-zA-Z ]*$/.test(username)) {
-      res.status(400).json({
+      return res.status(400).json({
         status: "FAILED",
         message: "Invalid name entered",
       });
     }
 
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      res.status(400).json({
+      return res.status(400).json({
         status: "FAILED",
         message: "Invalid email entered",
       });
     }
 
-    if (password.length < 8) {
-      res.status(400).json({
+    if (password.length < 5) {
+      return res.status(400).json({
         status: "FAILED",
         message: "Password is too short!",
       });

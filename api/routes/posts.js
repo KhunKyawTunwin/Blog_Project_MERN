@@ -8,7 +8,7 @@ router.post("/", postsControlller.createPost);
 router.put("/:id", postsControlller.postUpdate);
 
 // Delete Post
-router.delete("/:id", postsControlller.postDelete);
+router.delete("/:postId", postsControlller.postDelete);
 
 // Get Post
 router.get("/:id", postsControlller.getPost);
